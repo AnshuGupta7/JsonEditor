@@ -12,7 +12,7 @@ import java.util.*;
  * Created by agupta5 on 08-07-2016.
  */
 public class Replace {
-    public void replaceKey(ArrayList files, String path, Object newvalue){
+    public void replace(ArrayList files, String path, Object newvalue, boolean isKeyReplaceReq, boolean isValueReplaceReq){
         JSONParser parser= new JSONParser();
         String [] files1=(String[])files.toArray(new String[0]);
         try{
@@ -31,7 +31,7 @@ public class Replace {
                 Object obj = parser.parse(new FileReader(fileName));
                 JSONObject jsonObj=(JSONObject)obj;
                 
-                jsonObj=replaceRecur(jsonObj,elements,false,true,newvalue,len,len);
+                jsonObj=replaceRecur(jsonObj,elements,isKeyReplaceReq,isValueReplaceReq,newvalue,len,len);
                 
                 FileWriter output = new FileWriter(fileName, false);
                 output.write(jsonObj.toString());
@@ -82,13 +82,12 @@ public class Replace {
         return jsonObject;
 
     }
-	/*
-    public static void main(String[] args){
-        ReplaceKey rk=new ReplaceKey();
+
+    /*public static void main(String[] args){
+        Replace rk=new Replace();
         ArrayList arr=new ArrayList();
         arr.add("D:\\EditTool\\test1.json");
         arr.add("D:\\EditTool\\test2.json");
-        rk.replaceKey(arr,"SecurityData[0].Price.amount",45.6);
-    }
-	*/
+        rk.replace(arr,"SecurityData[0].Price.amount",10.5,false,true);
+    }*/
 }
